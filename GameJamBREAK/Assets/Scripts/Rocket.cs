@@ -23,7 +23,7 @@ public class Rocket : MonoBehaviour
         //    destructable.Destruct(Vector3.zero, 0, 0);
         //}
 
-        explode.DoExplode(transform.position, 3, 50);
+        explode.DoExplode(transform.position, 3, force);
         Instantiate(explosionPrefab, transform.position,Quaternion.identity);
         gameObject.SetActive(false);
     }
