@@ -6,6 +6,7 @@ public class Rocket : MonoBehaviour
 {
     [SerializeField] private float speed = 100;
     [SerializeField] private float force = 50;
+    [SerializeField] private float radius = 5;
     [SerializeField] private float timeToLive = 3;
     [SerializeField] private Explode explode;
     [SerializeField] private GameObject explosionPrefab;
@@ -23,7 +24,7 @@ public class Rocket : MonoBehaviour
         //    destructable.Destruct(Vector3.zero, 0, 0);
         //}
 
-        explode.DoExplode(transform.position, 3, force);
+        explode.DoExplode(transform.position, radius, force);
         Instantiate(explosionPrefab, transform.position,Quaternion.identity);
         gameObject.SetActive(false);
     }
