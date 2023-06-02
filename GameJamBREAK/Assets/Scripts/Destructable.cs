@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviour
 {
-    
-    
+
+    Slicer slicer;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        slicer= GetComponent<Slicer>();
     }
 
     // Update is called once per frame
@@ -19,6 +19,7 @@ public class Destructable : MonoBehaviour
 
     public void Destruct(Vector3 position, float radius, float force)
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        slicer.split = true;
     }
 }
