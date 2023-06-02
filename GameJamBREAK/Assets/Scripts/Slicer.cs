@@ -117,6 +117,7 @@ public class Slicer : MonoBehaviour
         GameObject gameObject = new GameObject();
         gameObject.transform.parent = parent;
         gameObject.transform.position = origin.transform.position;
+        gameObject.transform.localScale = origin.transform.localScale;
         Mesh mesh = new Mesh();
         mesh.Clear();
         mesh.vertices = meshInformation.vertices.ToArray();
