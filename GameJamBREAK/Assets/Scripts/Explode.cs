@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable Objects/Explode", fileName = "NewExplode")]
 public class Explode : ScriptableObject
 {
-    Collider[] colliders = new Collider[30];
+    Collider[] colliders = new Collider[300];
     //[SerializeField]private float radius;
     //[SerializeField]public float force;
     public LayerMask layerMask;

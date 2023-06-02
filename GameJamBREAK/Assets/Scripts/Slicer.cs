@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Slicer : MonoBehaviour
 {
@@ -58,16 +59,20 @@ public class Slicer : MonoBehaviour
             Destroy(sliceMe.gameObject);
             sliceMe = meshHolder.transform;
         }
-        StartCoroutine(Delay(sliceMe, force, explosionPosition, radius));
+        //StartCoroutine(Delay(sliceMe, force, explosionPosition, radius));
+        for (int i = 0; i < sliceMe.childCount; i++)
+        {
+            sliceMe.GetChild(i).GetComponent<Rigidbody>().AddExplosionForce(force, explosionPosition + Vector3.down, radius + 1.4f);
+        }
     }
 
     IEnumerator Delay(Transform sliceMe, float force, Vector3 explosionPosition, float radius)
     {
-        yield return null;
+        yield return new WaitForFixedUpdate();
         int length = sliceMe.childCount;
         for (int i = 0; i < length; i++)
         {
-            sliceMe.GetChild(i).GetComponent<Rigidbody>().AddExplosionForce(force, explosionPosition, radius);
+            sliceMe.GetChild(i).GetComponent<Rigidbody>().AddExplosionForce(force, explosionPosition+Vector3.down, radius+1.4f);
         }
     }
 
