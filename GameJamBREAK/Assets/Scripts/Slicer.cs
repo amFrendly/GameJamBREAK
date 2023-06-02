@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -26,6 +27,47 @@ public class Slicer : MonoBehaviour
         {
             Slice(transform, flatShade, splitAmount);
             didSplit = true;
+        }
+    }
+
+    public void SliceWithForce(Vector3 explosionPosition, float radius, float force)
+    {
+        if (didSplit) return;
+        didSplit = true;
+        Transform sliceMe = transform;
+        Bounds bounds = GetBounds(sliceMe);
+
+        for (int i = 0; i < splitAmount; i++)
+        {
+            MeshFilter[] meshFilters = sliceMe.transform.GetComponentsInChildren<MeshFilter>();
+            GameObject meshHolder = new GameObject("Mesh Holder");
+            meshHolder.transform.position = sliceMe.position;
+
+
+            Vector3 rotation = Random.rotation.eulerAngles;
+            Debug.Log(rotation);
+            Vector3 position = GetRandomPositionWithin(bounds) - sliceMe.position;
+
+            Plane plane = new Plane(rotation, position);
+
+            for (int k = 0; k < meshFilters.Length; k++)
+            {
+                Slice(meshFilters[k], plane, meshHolder.transform, flatShade);
+            }
+
+            Destroy(sliceMe.gameObject);
+            sliceMe = meshHolder.transform;
+        }
+        StartCoroutine(Delay(sliceMe, force, explosionPosition, radius));
+    }
+
+    IEnumerator Delay(Transform sliceMe, float force, Vector3 explosionPosition, float radius)
+    {
+        yield return null;
+        int length = sliceMe.childCount;
+        for (int i = 0; i < length; i++)
+        {
+            sliceMe.GetChild(i).GetComponent<Rigidbody>().AddExplosionForce(force, explosionPosition, radius);
         }
     }
 
