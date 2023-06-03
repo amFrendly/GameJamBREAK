@@ -4,7 +4,7 @@ using UnityEngine;
 public class KatanaSlicer : MonoBehaviour
 {
     [SerializeField] Transform sliceWith;
-    bool canSliceAnimation = false;
+    bool canSliceAnimation = true;
     public bool canSlice = true;
 
     List<Transform> dontSliceAgain = new List<Transform>();
@@ -20,7 +20,7 @@ public class KatanaSlicer : MonoBehaviour
         dontSliceAgain.Clear();
     }
 
-    private void Slice(Collider collider)
+    public void Slice(Collider collider)
     {
         if (!canSliceAnimation) return;
         if (!canSlice) return;
@@ -32,7 +32,6 @@ public class KatanaSlicer : MonoBehaviour
             // Slice the gameObject inside the trigger
             GameObject meshHolder = KatanaSlice.Cut(collider.transform, sliceWith, true);
             dontSliceAgain.Add(meshHolder.transform);
-
             // add some force would be cool
 
         }
@@ -44,6 +43,7 @@ public class KatanaSlicer : MonoBehaviour
         {
             for (int k = 0; k < dontSliceAgain[i].childCount; k++)
             {
+                if (dontSliceAgain[i] == null) continue;
                 Transform transform = dontSliceAgain[i].GetChild(k);
                 if (transform == collider.transform)
                 {

@@ -9,6 +9,9 @@ public class KatanaActivation : MonoBehaviour
 
     [SerializeField] Transform katana;
     [SerializeField] float distance;
+    [SerializeField] Rigidbody playerRB;
+    [SerializeField] float distanceUsed;
+    Collider currentSlice;
 
     private void Start()
     {
@@ -18,20 +21,35 @@ public class KatanaActivation : MonoBehaviour
 
     private void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, distance, LayerMask.GetMask("Targets")))
+        float extra = playerRB.velocity.magnitude;
+        if (Physics.Raycast(transform.position, transform.forward + playerRB.velocity.normalized, out RaycastHit hit, distance + extra * distanceUsed, LayerMask.GetMask("Targets")))
         {
-            animator.SetBool("swing", true);
-            katanaSlicer.canSlice = true;   
+            if(currentSlice == hit.collider)
+            {
+                return;
+            }
+
+            currentSlice = hit.collider;
+            animator.SetTrigger("swing");
+            katanaSlicer.canSlice = true;
+
+            if (extra > 30)
+            {
+                katanaSlicer.Slice(hit.collider);
+            }
         }
         else
         {
-            animator.SetBool("swing", false);
+            animator.ResetTrigger("swing");
             katanaSlicer.canSlice = false;
+            currentSlice = null;
         }
     }
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawLine(transform.position, transform.position + transform.forward * distance);
+        float extra = playerRB.velocity.magnitude;
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * distance + transform.forward * extra * distanceUsed);
     }
 }
