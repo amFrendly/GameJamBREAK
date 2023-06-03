@@ -9,9 +9,10 @@ public class LevelLoader : MonoBehaviour
 {
     [Header("Black Image")]
     [SerializeField] private Image blackOutSquare;
-    [Space]
-    [Header("Scene")]
-    [SerializeField] private string sceneName;
+    private string sceneName;
+
+    public delegate void OnFadeEnd();
+    public OnFadeEnd fadeEnd;
 
     private void Awake()
     {
@@ -19,17 +20,22 @@ public class LevelLoader : MonoBehaviour
     }
     void Start()
     {
-        if (sceneName == null) Debug.Log("No scene to load!!");
         if (blackOutSquare == null) Debug.Log("No BlackOut Image");
-
-        if (blackOutSquare != null && sceneName != null) StartCoroutine(FadeToBlack(false));
+        if (blackOutSquare.enabled == false) blackOutSquare.enabled = true;
+        if (blackOutSquare != null) StartCoroutine(FadeToBlack(false));
     }
 
-    public void NextScene()
+    public void NextScene(string sceneName)
     {
+        this.sceneName = sceneName;
         StartCoroutine(FadeToBlack());
     }
     
+    public void RestartLevel()
+    {
+        sceneName = SceneManager.GetActiveScene().name;
+        StartCoroutine(FadeToBlack());
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -47,7 +53,7 @@ public class LevelLoader : MonoBehaviour
         {
             while (blackOutSquare.color.a < 1)
             {
-                fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+                fadeAmount = objectColor.a + (fadeSpeed * Time.fixedDeltaTime);
 
                 objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
                 blackOutSquare.color = objectColor;
@@ -62,12 +68,13 @@ public class LevelLoader : MonoBehaviour
         {
             while (blackOutSquare.color.a > 0)
             {
-                fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
+                fadeAmount = objectColor.a - (fadeSpeed * Time.fixedDeltaTime);
 
                 objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
                 blackOutSquare.color = objectColor;
                 yield return null;
             }
+                fadeEnd?.Invoke();
         }
     }
 }
