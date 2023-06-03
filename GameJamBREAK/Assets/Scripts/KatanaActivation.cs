@@ -35,7 +35,6 @@ public class KatanaActivation : MonoBehaviour
 
             if (extra > 30)
             {
-                Debug.Log("used Extra Slice");
                 katanaSlicer.Slice(hit.collider);
             }
         }
