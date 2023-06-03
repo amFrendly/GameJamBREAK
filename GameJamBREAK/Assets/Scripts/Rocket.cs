@@ -11,6 +11,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] private Explode explode;
     [SerializeField] private GameObject explosionPrefab;
     private Rigidbody rb;
+    private bool hasExploded;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -24,7 +25,10 @@ public class Rocket : MonoBehaviour
         //    destructable.Destruct(Vector3.zero, 0, 0);
         //}
 
-        explode.DoExplode(transform.position, radius, force);
+        if (hasExploded) return;
+
+        hasExploded = true;
+        explode.DoExplode(collision.contacts[0].point, radius, force);
         Instantiate(explosionPrefab, transform.position,Quaternion.identity);
         gameObject.SetActive(false);
     }
