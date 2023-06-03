@@ -20,6 +20,7 @@ public class Destructable : MonoBehaviour
     public void Destruct(Vector3 position, float radius, float force)
     {
         //gameObject.SetActive(false);
-        slicer.split = true;
+       // slicer.split = true;
+        slicer.SliceWithForce(position, radius, force);
     }
 }
