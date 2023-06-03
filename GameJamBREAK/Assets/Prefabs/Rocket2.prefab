@@ -64,8 +64,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  force: 900
-  radius: 3
+  force: 1000
+  radius: 4
   timeToLive: 3
   explode: {fileID: 11400000, guid: 5bf022543ee52214a8bab840175be030, type: 2}
   explosionPrefab: {fileID: 1263227030248845214, guid: fd5c0e52b7585fb4aabbab42b6d6f08d, type: 3}

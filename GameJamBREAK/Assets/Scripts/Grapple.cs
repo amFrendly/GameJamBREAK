@@ -76,11 +76,17 @@ public class Grapple : MonoBehaviour
                 return;
             }
 
-            float f = 2 - (Vector3.Dot(rb.velocity.normalized, grappleDir) + 1);
+            float velocityRatio = 2 - (Vector3.Dot(rb.velocity.normalized, grappleDir) + 1);
+            float distanceRatio = Mathf.Clamp01(grappleDist / 10);
             if (Vector3.Dot(rb.velocity, grappleDir) < grappleForce /*|| Vector3.Dot(rb.velocity.normalized, grappleDir) < Mathf.Cos(45 * Mathf.Deg2Rad)*/)
             {
-                rb.AddForce(grappleDir * f * grappleForce / 2, ForceMode.VelocityChange);
+                rb.AddForce(grappleDir * velocityRatio * grappleForce * distanceRatio, ForceMode.VelocityChange);
             }
+
+            //rb.useGravity = false;
+            //rb.velocity = Vector3.zero;
+
+            //rb.position += grappleDir * grappleForce * Time.deltaTime;
         }
     }
 }

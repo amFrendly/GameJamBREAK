@@ -15,3 +15,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 2147483647
+  playerBody: {fileID: 4463690589064842443, guid: dac40e3603c9dea4fb3bac3396f42fd3, type: 3}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
