@@ -456,4 +456,18 @@ AnimationClip:
     script: {fileID: 0}
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.25
+    functionName: CanSlice
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: d2fc2136c4d32034daae61490e123ea4, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.41666666
+    functionName: CanNotSlice
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: d2fc2136c4d32034daae61490e123ea4, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
