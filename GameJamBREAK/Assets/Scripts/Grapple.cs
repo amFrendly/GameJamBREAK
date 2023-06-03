@@ -24,6 +24,9 @@ public class Grapple : MonoBehaviour
     [SerializeField]
     LineRenderer line;
 
+    [SerializeField]
+    float minGrappleDistance = 1;
+
     Vector3 grapplePoint;
 
     bool grapple;
@@ -64,13 +67,15 @@ public class Grapple : MonoBehaviour
     {
         if (grapple)
         {
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, (grapplePoint - transform.position).magnitude - 0.5f, groundMask))
+            float grappleDist = (grapplePoint - transform.position).magnitude;
+            Vector3 grappleDir = (grapplePoint - transform.position).normalized;
+
+            if (Physics.Raycast(cam.transform.position, grappleDir, grappleDist - 0.5f, groundMask) || grappleDist < minGrappleDistance)
             {
                 grapple = false;
                 return;
             }
 
-            Vector3 grappleDir = (grapplePoint - transform.position).normalized;
             if (Vector3.Dot(rb.velocity, grappleDir) < grappleForce || Vector3.Dot(rb.velocity.normalized, grappleDir) < Mathf.Cos(45 * Mathf.Deg2Rad)) rb.AddForce(grappleDir * grappleForce, ForceMode.VelocityChange);
         }
     }
