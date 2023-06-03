@@ -30,7 +30,7 @@ public class EndScreenManager : MonoBehaviour
     void Start()
     {
         MainHud.SetActive(true);
-        EndScreen.SetActive(true);
+        EndScreen.SetActive(false);
         bestTimeFloat = highScoreManager.GetBestTime(SceneManager.GetActiveScene().name);
     }
 
