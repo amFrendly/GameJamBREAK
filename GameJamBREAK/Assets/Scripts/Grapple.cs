@@ -62,7 +62,7 @@ public class Grapple : MonoBehaviour
         if (grapple)
         {
             Vector3 grappleDir = (grapplePoint - transform.position).normalized;
-            if (Vector3.Dot(rb.velocity, grappleDir) < grappleForce) rb.AddForce(grappleDir * grappleForce, ForceMode.VelocityChange);
+            if (Vector3.Dot(rb.velocity, grappleDir) < grappleForce || Vector3.Dot(rb.velocity.normalized, grappleDir) < Mathf.Cos(45 * Mathf.Deg2Rad)) rb.AddForce(grappleDir * grappleForce, ForceMode.VelocityChange);
         }
     }
 }
