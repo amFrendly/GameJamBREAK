@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -29,7 +30,7 @@ public class EndScreenManager : MonoBehaviour
     void Start()
     {
         MainHud.SetActive(true);
-        EndScreen.SetActive(false);
+        EndScreen.SetActive(true);
         bestTimeFloat = highScoreManager.GetBestTime(SceneManager.GetActiveScene().name);
     }
 
@@ -44,7 +45,8 @@ public class EndScreenManager : MonoBehaviour
         }
         else
         {
-            bestTime.text = highScoreManager.GetBestTime(SceneManager.GetActiveScene().name).ToString(@"mm\:ss\:ff");
+            TimeSpan time = TimeSpan.FromSeconds(bestTimeFloat);
+            bestTime.text = time.ToString(@"mm\:ss\:ff");
             yourTime.text = speedRunTimer.CurrentTime.ToString(@"mm\:ss\:ff");
 
         }
