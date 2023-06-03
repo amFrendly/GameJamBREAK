@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KatanaActivation : MonoBehaviour
+public class KatanaSlicer : MonoBehaviour
 {
-    [SerializeField] float sliceTimer;
     [SerializeField] Transform sliceWith;
     bool canSliceAnimation = false;
 
