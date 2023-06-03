@@ -33,10 +33,10 @@ public class PlayerMovement : MonoBehaviour
     {
         //Constantly walking at walkingSpeed!
         float deltaSpeed = walkingSpeed - rb.velocity.magnitude;
-        if (deltaSpeed > 0)rb.AddForce(new Vector3(transform.forward.x, 0, transform.forward.z).normalized * deltaSpeed, ForceMode.VelocityChange);
+        if (deltaSpeed > 0 && isGrounded)rb.AddForce(new Vector3(transform.forward.x, 0, transform.forward.z).normalized * deltaSpeed, ForceMode.VelocityChange);
         if (isGrounded)
         {
-            rb.AddForce(-rb.velocity * 0.9f, ForceMode.VelocityChange);
+            rb.AddForce(new Vector3(-rb.velocity.x, 0, -rb.velocity.z) * 0.5f, ForceMode.VelocityChange);
         }
     }
 
