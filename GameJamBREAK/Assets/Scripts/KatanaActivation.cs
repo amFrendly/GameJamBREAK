@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+<<<<<<< Updated upstream
 using Unity.VisualScripting;
+=======
+>>>>>>> Stashed changes
 using UnityEngine;
 
 public class KatanaActivation : MonoBehaviour
 {
+<<<<<<< Updated upstream
 
     [SerializeField] float sliceTimer;
     float timer;
@@ -53,3 +57,23 @@ public class KatanaActivation : MonoBehaviour
         }
     }
 }
+=======
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+}
+>>>>>>> Stashed changes
