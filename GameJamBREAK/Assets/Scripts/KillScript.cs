@@ -22,4 +22,12 @@ public class KillScript : MonoBehaviour
             Kill();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((killLayer & (1 << other.gameObject.layer)) != 0)
+        {
+            Kill();
+        }
+    }
 }

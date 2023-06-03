@@ -9,6 +9,8 @@ public class Explode : ScriptableObject
     public LayerMask layerMask;
     public Rigidbody playerBody;
 
+    [SerializeField] LayerMask playerLayer;
+
 
     public void DoExplode(Vector3 position, float radius, float force)
     {
@@ -18,15 +20,13 @@ public class Explode : ScriptableObject
             Rigidbody rigidbody = colliders[i].attachedRigidbody;
             if(rigidbody != null)
             {
-                //if (rigidbody == playerBody)
-                //{
-                //    Vector3 toPlayer = (position - rigidbody.position).normalized * force;
-                //    rigidbody.AddForce(toPlayer);
-                //}
-                //else
-                //{
-                    rigidbody.AddExplosionForce(force, position, radius);
-                //}
+                if ((playerLayer & (1 << colliders[i].gameObject.layer)) != 0)
+                {
+                    //rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z)/2;
+                    if (rigidbody.velocity.y < 0) rigidbody.AddForce(new Vector3(0, -rigidbody.velocity.y - Physics.gravity.y * Time.deltaTime, 0), ForceMode.VelocityChange);
+                }
+                rigidbody.AddExplosionForce(force, position, radius);
+                
             }
             else if(colliders[i].TryGetComponent(out Destructable destructable))
             {
