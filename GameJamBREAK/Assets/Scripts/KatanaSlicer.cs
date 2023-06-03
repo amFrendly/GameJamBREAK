@@ -5,6 +5,7 @@ public class KatanaSlicer : MonoBehaviour
 {
     [SerializeField] Transform sliceWith;
     bool canSliceAnimation = false;
+    public bool canSlice = true;
 
     List<Transform> dontSliceAgain = new List<Transform>();
 
@@ -22,6 +23,7 @@ public class KatanaSlicer : MonoBehaviour
     private void Slice(Collider collider)
     {
         if (!canSliceAnimation) return;
+        if (!canSlice) return;
 
         if (IsAlreadySliced(collider)) return;
 

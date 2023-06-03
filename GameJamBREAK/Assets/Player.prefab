@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 1489076478}
   m_Father: {fileID: 804334104004894351}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &624727384
 MeshFilter:
@@ -290,6 +290,7 @@ Transform:
   m_Children:
   - {fileID: 1329939955}
   - {fileID: 4481214934916455983}
+  - {fileID: 5208976790492330033}
   - {fileID: 910616519016016273}
   - {fileID: 624727385}
   m_Father: {fileID: 804334104074812312}
@@ -681,6 +682,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4505289874636180199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5208976790492330033}
+  m_Layer: 7
+  m_Name: Katana Activation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5208976790492330033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4505289874636180199}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 804334104004894351}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4655504324643453870
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,7 +753,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4678cf47c2bad8841b702500be76c824, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4678cf47c2bad8841b702500be76c824, type: 3}
       propertyPath: m_LocalScale.x
@@ -837,6 +869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sliceWith: {fileID: 7539023277053799881}
+  canSlice: 0
 --- !u!4 &910616519016016273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4678cf47c2bad8841b702500be76c824, type: 3}
