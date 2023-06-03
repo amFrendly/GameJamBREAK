@@ -1403,6 +1403,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4481214934916455983, guid: 377c436475ffa3f458227756a9a5d1a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.71
+      objectReference: {fileID: 0}
     - target: {fileID: 4655504324643453870, guid: 377c436475ffa3f458227756a9a5d1a3, type: 3}
       propertyPath: m_Name
       value: Katana Correct Rotation
