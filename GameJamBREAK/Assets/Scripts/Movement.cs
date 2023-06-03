@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerMovement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     Rigidbody rb;
     Camera cam;
@@ -11,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     float jumpForce;
 
     bool isGrounded;
+    bool hasJumped;
+    bool jump;
 
     void Start()
     {
@@ -23,7 +22,12 @@ public class PlayerMovement : MonoBehaviour
     {
         LookAround();
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        //if (Input.GetKeyDown(KeyCode.Space) && isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if (Input.GetKey(KeyCode.Space) && !hasJumped && isGrounded)
+        {
+            jump = true;
+            hasJumped = true;
+        }
     }
 
     [SerializeField]
@@ -32,11 +36,17 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Constantly walking at walkingSpeed!
-        float deltaSpeed = walkingSpeed - rb.velocity.magnitude;
-        if (deltaSpeed > 0 && isGrounded)rb.AddForce(new Vector3(transform.forward.x, 0, transform.forward.z).normalized * deltaSpeed, ForceMode.VelocityChange);
+        //float deltaSpeed = walkingSpeed - rb.velocity.magnitude;
+        // if (deltaSpeed > 0)rb.AddForce(new Vector3(transform.forward.x, 0, transform.forward.z).normalized * deltaSpeed, ForceMode.VelocityChange);
         if (isGrounded)
         {
-            rb.AddForce(new Vector3(-rb.velocity.x, 0, -rb.velocity.z) * 0.5f, ForceMode.VelocityChange);
+            rb.AddForce(-new Vector3(rb.velocity.x, 0, rb.velocity.z) * .5f, ForceMode.VelocityChange);
+        }
+
+        if (jump)
+        {
+            rb.AddForce(new Vector3(transform.forward.x, 1, transform.forward.z) * 10, ForceMode.Impulse);
+            jump = false;
         }
     }
 
@@ -66,5 +76,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         isGrounded = false;
+        hasJumped = false;
     }
+
 }
