@@ -19,6 +19,9 @@ public class Grapple : MonoBehaviour
     LayerMask layerMask;
 
     [SerializeField]
+    LayerMask groundMask;
+
+    [SerializeField]
     LineRenderer line;
 
     Vector3 grapplePoint;
@@ -61,6 +64,12 @@ public class Grapple : MonoBehaviour
     {
         if (grapple)
         {
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, (grapplePoint - transform.position).magnitude - 0.5f, groundMask))
+            {
+                grapple = false;
+                return;
+            }
+
             Vector3 grappleDir = (grapplePoint - transform.position).normalized;
             if (Vector3.Dot(rb.velocity, grappleDir) < grappleForce || Vector3.Dot(rb.velocity.normalized, grappleDir) < Mathf.Cos(45 * Mathf.Deg2Rad)) rb.AddForce(grappleDir * grappleForce, ForceMode.VelocityChange);
         }
