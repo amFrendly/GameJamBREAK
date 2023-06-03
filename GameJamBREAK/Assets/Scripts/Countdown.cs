@@ -16,11 +16,16 @@ public class Countdown : MonoBehaviour
     [Header("Count Text")]
     [SerializeField] private TextMeshProUGUI countText;
 
+    [Header("Player")]
+    [SerializeField] private GameObject player;
+
     private bool stopwatchActive = false;
     private float currentTime = 3;
 
     void Start()
     {
+        player.GetComponent<Gun>().enabled = false;
+        player.GetComponent<Grapple>().enabled = false;
         Time.timeScale = 0;
         stopwatchActive = false;
         countText.enabled = true;
@@ -33,6 +38,8 @@ public class Countdown : MonoBehaviour
     {
         stopwatchActive = false;
         countText.enabled = false;
+        player.GetComponent<Gun>().enabled = true;
+        player.GetComponent<Grapple>().enabled = true;
         Time.timeScale = 1;
     }
     private void FadeEnd()

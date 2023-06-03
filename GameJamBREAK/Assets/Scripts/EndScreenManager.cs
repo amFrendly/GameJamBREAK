@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndScreenManager : MonoBehaviour
 {
@@ -15,38 +16,41 @@ public class EndScreenManager : MonoBehaviour
     [Header("Header Text")]
     [SerializeField] private TextMeshProUGUI headerText;
     [SerializeField] private string OnWinText = "Completed";
-    [SerializeField] private string OnDeathText = "You lost";
 
     [Header("Stuff to subscribe to")]
-    [SerializeField] private string Example1 = "OnDeath";
     [SerializeField] private string Example2 = "OnWin";
+    [SerializeField] private HighScoreManager highScoreManager;
 
     [Header("Panels")]
     [SerializeField] private GameObject MainHud;
     [SerializeField] private GameObject EndScreen;
 
+    private float bestTimeFloat;
     void Start()
     {
         MainHud.SetActive(true);
         EndScreen.SetActive(false);
-
-
+        bestTimeFloat = highScoreManager.GetBestTime(SceneManager.GetActiveScene().name);
     }
 
     private void OnWin()
     {
         headerText.text = OnWinText.ToUpper();
-        yourTime.text = speedRunTimer.CurrentTime.ToString(@"mm\:ss\:ff");
+        if (speedRunTimer.CurrentTime < bestTimeFloat)
+        {
+            bestTime.text = speedRunTimer.CurrentTime.ToString(@"mm\:ss\:ff");
+            yourTime.text = speedRunTimer.CurrentTime.ToString(@"mm\:ss\:ff");
+            highScoreManager.SaveTime(SceneManager.GetActiveScene().name, speedRunTimer.CurrentTime);
+        }
+        else
+        {
+            bestTime.text = highScoreManager.GetBestTime(SceneManager.GetActiveScene().name).ToString(@"mm\:ss\:ff");
+            yourTime.text = speedRunTimer.CurrentTime.ToString(@"mm\:ss\:ff");
+
+        }
         MainHud.SetActive(false);
         EndScreen.SetActive(true);
 
-    }
-    private void OnDeath()
-    {
-        headerText.text = OnDeathText.ToUpper();
-        yourTime.text = speedRunTimer.CurrentTime.ToString(@"mm\:ss\:ff");
-        MainHud.SetActive(false);
-        EndScreen.SetActive(true);
     }
 
 }
