@@ -46,7 +46,6 @@ public class Slicer : MonoBehaviour
 
 
             Vector3 rotation = Random.rotation.eulerAngles;
-            Debug.Log(rotation);
             Vector3 position = GetRandomPositionWithin(bounds) - sliceMe.position;
 
             Plane plane = new Plane(rotation, position);
