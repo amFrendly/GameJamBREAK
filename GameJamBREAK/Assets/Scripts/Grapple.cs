@@ -67,16 +67,20 @@ public class Grapple : MonoBehaviour
     {
         if (grapple)
         {
-            float grappleDist = (grapplePoint - transform.position).magnitude;
-            Vector3 grappleDir = (grapplePoint - transform.position).normalized;
+            float grappleDist = (grapplePoint - grappleBarrel.position).magnitude;
+            Vector3 grappleDir = (grapplePoint - grappleBarrel.position).normalized;
 
-            if (Physics.Raycast(cam.transform.position, grappleDir, grappleDist - 0.5f, groundMask) || grappleDist < minGrappleDistance)
+            if (Physics.Raycast(grappleBarrel.position, grappleDir, grappleDist - 0.5f, groundMask) || grappleDist < minGrappleDistance)
             {
                 grapple = false;
                 return;
             }
 
-            if (Vector3.Dot(rb.velocity, grappleDir) < grappleForce || Vector3.Dot(rb.velocity.normalized, grappleDir) < Mathf.Cos(45 * Mathf.Deg2Rad)) rb.AddForce(grappleDir * grappleForce, ForceMode.VelocityChange);
+            float f = 2 - (Vector3.Dot(rb.velocity.normalized, grappleDir) + 1);
+            if (Vector3.Dot(rb.velocity, grappleDir) < grappleForce /*|| Vector3.Dot(rb.velocity.normalized, grappleDir) < Mathf.Cos(45 * Mathf.Deg2Rad)*/)
+            {
+                rb.AddForce(grappleDir * f * grappleForce / 2, ForceMode.VelocityChange);
+            }
         }
     }
 }
