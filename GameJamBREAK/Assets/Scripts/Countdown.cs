@@ -22,6 +22,11 @@ public class Countdown : MonoBehaviour
     private bool stopwatchActive = false;
     private float currentTime = 3;
 
+    private void Awake()
+    {
+        Time.timeScale = 0;
+        
+    }
     void Start()
     {
         player.GetComponent<Gun>().enabled = false;
@@ -50,7 +55,7 @@ public class Countdown : MonoBehaviour
     {
         if (stopwatchActive)
         {
-            currentTime = currentTime - Time.fixedDeltaTime;
+            currentTime = currentTime - Time.unscaledDeltaTime;
             if (currentTime < 0)
                 countdownEnd?.Invoke();
         }
