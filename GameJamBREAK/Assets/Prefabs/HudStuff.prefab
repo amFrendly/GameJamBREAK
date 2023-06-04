@@ -476,6 +476,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3288453114469255239, guid: e476d70b2f8559e4b850feb8c409cd78, type: 3}
+      propertyPath: m_Color.a
+      value: 0.39607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288453114469255239, guid: e476d70b2f8559e4b850feb8c409cd78, type: 3}
       propertyPath: m_Maskable
       value: 0
       objectReference: {fileID: 0}
