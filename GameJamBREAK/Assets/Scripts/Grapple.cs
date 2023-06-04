@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,13 +33,21 @@ public class Grapple : MonoBehaviour
     [SerializeField]
     Image crosshair;
 
+    [SerializeField] private GameObject hook;
+    [SerializeField] private int segments = 100;
+    [SerializeField] private float grappleAnimationTime = 1.0f;
+    [SerializeField] private float amplitude = 3.0f;
+    [SerializeField] private AnimationCurve dropOff;
+
     Vector3 grapplePoint;
 
     bool grapple;
+    float grappleTime;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        line.positionCount = segments;
     }
 
     void Update()
@@ -59,6 +69,7 @@ public class Grapple : MonoBehaviour
             if (aimedAtGrappleWall)
             {
                 grapplePoint = hit.point;
+                grappleTime = 0;
                 grapple = true;
             }
         }
@@ -70,12 +81,41 @@ public class Grapple : MonoBehaviour
 
         if (grapple)
         {
+            grappleTime += Time.deltaTime;
+            //if(grappleTime >= )
+
             line.enabled = true;
-            line.SetPositions(new Vector3[] { grappleBarrel.position, grapplePoint });
+            //line.SetPositions(new Vector3[] { grappleBarrel.position, grapplePoint });
+            AnimateLine();
+            hook.SetActive(false);
         }
         else
         {
             line.enabled = false;
+            hook.SetActive(true);
+        }
+    }
+
+    private void AnimateLine()
+    {
+        
+        float animTime = Mathf.InverseLerp(0, grappleAnimationTime, grappleTime); //animation time normalized 0 anim start 1 is end
+        Vector3 toPoint = grapplePoint - grappleBarrel.position;
+        Vector3 direction = toPoint.normalized;
+        //Vector3 dirNormal = Vector3.Cross(direction, Vector3.up);
+        //dirNormal = Vector3.Cross(direction, dirNormal);
+        float distance = toPoint.magnitude * animTime;
+        //float distanceMultiplier = animTime * 
+        for (int i = 0; i < line.positionCount; i++)
+        {
+            float t = (float)i / segments; //how far along the line
+            Vector3 position = grappleBarrel.position + t * distance * direction;
+
+            Vector3 positionOffset = grappleBarrel.forward * amplitude * Mathf.Sin(distance * t * Mathf.PI) * dropOff.Evaluate(t) * (1-animTime);
+            positionOffset += grappleBarrel.right * amplitude * Mathf.Cos(distance * t * Mathf.PI) * dropOff.Evaluate(t) * (1 - animTime);
+            position += positionOffset;
+
+            line.SetPosition(i, position);
         }
     }
 
