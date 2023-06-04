@@ -16,6 +16,7 @@ public class EndScreenManager : MonoBehaviour
     [Header("Header Text")]
     [SerializeField] private TextMeshProUGUI headerText;
     [SerializeField] private string OnWinText = "Completed";
+    [SerializeField] private TextMeshProUGUI newBest;
 
     [Header("Stuff to subscribe to")]
     [SerializeField] private HighScoreManager highScoreManager;
@@ -32,6 +33,7 @@ public class EndScreenManager : MonoBehaviour
     {
         MainHud.SetActive(true);
         EndScreen.SetActive(false);
+        newBest.enabled = false;
         bestTimeFloat = highScoreManager.GetBestTime(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name == "Level4")
         {
@@ -50,9 +52,9 @@ public class EndScreenManager : MonoBehaviour
         headerText.text = OnWinText.ToUpper();
         if (speedRunTimer.CurrentTime < bestTimeFloat)
         {
-            TimeSpan bestTimeSpan = TimeSpan.FromSeconds(bestTimeFloat);
-            bestTime.text = bestTimeSpan.ToString(@"mm\:ss\:ff");
+            newBest.enabled = true;
             TimeSpan time = TimeSpan.FromSeconds(speedRunTimer.CurrentTime);
+            bestTime.text = time.ToString(@"mm\:ss\:ff");
             yourTime.text = time.ToString(@"mm\:ss\:ff");
             highScoreManager.SaveTime(SceneManager.GetActiveScene().name, speedRunTimer.CurrentTime);
         }
