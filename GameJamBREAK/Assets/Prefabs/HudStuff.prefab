@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  distanceCheck: 100
+  distanceCheck: 1000
   crosshair: {fileID: 1644815123759259023}
   grappleLayer:
     serializedVersion: 2

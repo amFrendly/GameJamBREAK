@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Crosshair : MonoBehaviour
 {
     [SerializeField] Camera cam;
-    [SerializeField] float distanceCheck = 100f;
+    //[SerializeField] float distanceCheck = 100f;
     [SerializeField] Image crosshair;
 
     [Header("Layers")]
@@ -27,11 +27,11 @@ public class Crosshair : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, distanceCheck, grappleLayer))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit _, grappleLayer))
         {
             crosshair.color = grappleColor;
         }
-        else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, distanceCheck, targetLayer))
+        else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _, targetLayer))
         {
             crosshair.color = targetColor;
         }
