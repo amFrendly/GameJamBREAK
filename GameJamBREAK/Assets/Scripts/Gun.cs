@@ -1,22 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GameObject rocketPrefab;
     [SerializeField] private Transform rocketSpawn;
+    [SerializeField] private float fireRate = 0.5f;
+    float fireCounter;
 
     void Start()
     {
-        
+        fireCounter = fireRate;
     }
 
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        fireCounter += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Mouse0) && fireCounter >= fireRate)
         {
+            fireCounter = 0;
             var rocket = Instantiate(rocketPrefab, rocketSpawn.position, rocketSpawn.rotation);
         }
     }
