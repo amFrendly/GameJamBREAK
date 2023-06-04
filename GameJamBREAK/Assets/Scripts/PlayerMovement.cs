@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded;
 
+    int lookAxis = 1;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -24,8 +26,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //Invert Y look axis
+        if (Input.GetKeyDown(KeyCode.Keypad4)) lookAxis = -lookAxis;
+
         LookAround();
 
+        //Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
@@ -51,11 +57,13 @@ public class PlayerMovement : MonoBehaviour
     float rotationX;
 
     private void LookAround()
-    {
-        rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+    { 
+        rotationX += -Input.GetAxis("Vertical") * lookSpeed * lookAxis; //Joystick
+        rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;             //Mouse
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
         cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Horizontal") * lookSpeed, 0);  //Joystick
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);     //Mouse
     }
 
     //private void OnTriggerEnter(Collider other)

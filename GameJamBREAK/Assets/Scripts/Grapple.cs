@@ -53,7 +53,7 @@ public class Grapple : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Mouse1))
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, maxGrappleDistance, layerMask))
             {
@@ -64,7 +64,7 @@ public class Grapple : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse1))
+        if (Input.GetKeyUp(KeyCode.Keypad6) || Input.GetKeyUp(KeyCode.Mouse1))
         {
             grapple = false;
         }
