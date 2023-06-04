@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +25,8 @@ public class EndScreenManager : MonoBehaviour
     [SerializeField] private GameObject MainHud;
     [SerializeField] private GameObject EndScreen;
     [SerializeField] private Button nextLevelBtn;
+    [Header("Player prefab")]
+    [SerializeField] private GameObject player;
 
     private float bestTimeFloat;
     void Start()
@@ -43,6 +43,11 @@ public class EndScreenManager : MonoBehaviour
     public void OnWin()
     {
         Time.timeScale = 0;
+        player.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponent<Gun>().enabled = false;
+        player.GetComponent<Grapple>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         headerText.text = OnWinText.ToUpper();
         if (speedRunTimer.CurrentTime < bestTimeFloat)
         {

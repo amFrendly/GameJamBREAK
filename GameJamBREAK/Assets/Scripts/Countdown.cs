@@ -31,6 +31,7 @@ public class Countdown : MonoBehaviour
     {
         player.GetComponent<Gun>().enabled = false;
         player.GetComponent<Grapple>().enabled = false;
+
         Time.timeScale = 0;
         stopwatchActive = false;
         countText.enabled = true;
@@ -45,6 +46,7 @@ public class Countdown : MonoBehaviour
         countText.enabled = false;
         player.GetComponent<Gun>().enabled = true;
         player.GetComponent<Grapple>().enabled = true;
+        player.GetComponent<PlayerMovement>().enabled = true;
         Time.timeScale = 1;
     }
     private void FadeEnd()
