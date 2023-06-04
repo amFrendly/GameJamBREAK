@@ -9,6 +9,9 @@ public class KatanaSlicer : MonoBehaviour
 
     List<Transform> dontSliceAgain = new List<Transform>();
 
+    public delegate void OnSlice();
+    public OnSlice onSlice;
+
     public void CanNotSlice()
     {
         canSliceAnimation = false;
@@ -32,6 +35,11 @@ public class KatanaSlicer : MonoBehaviour
             // Slice the gameObject inside the trigger
             GameObject meshHolder = KatanaSlice.Cut(collider.transform, sliceWith, true);
             dontSliceAgain.Add(meshHolder.transform);
+            onSlice?.Invoke();
+            if(collider.gameObject.TryGetComponent(out Destructable destructable))
+            {
+                destructable.Sliced();
+            }
             // add some force would be cool
 
         }
