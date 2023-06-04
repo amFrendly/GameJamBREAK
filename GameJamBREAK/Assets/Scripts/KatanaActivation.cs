@@ -4,52 +4,40 @@ using UnityEngine;
 
 public class KatanaActivation : MonoBehaviour
 {
-    KatanaSlicer katanaSlicer;
     Animator animator;
 
     [SerializeField] Transform katana;
     [SerializeField] float distance;
     [SerializeField] Rigidbody playerRB;
     [SerializeField] float distanceUsed;
-    Collider currentSlice;
+    KatanaSlicer2 katanaSlicer;
+
+    [SerializeField] Vector2 detectionSize;
 
     private void Start()
     {
-        katanaSlicer = katana.GetComponent<KatanaSlicer>();
         animator = katana.GetComponent<Animator>();
+        katanaSlicer = katana.GetComponent<KatanaSlicer2>();
     }
 
     private void Update()
     {
-        float extra = playerRB.velocity.magnitude;
-        if (Physics.Raycast(transform.position, transform.forward + playerRB.velocity.normalized, out RaycastHit hit, distance + extra * distanceUsed, LayerMask.GetMask("Targets")))
+        float speed = playerRB.velocity.magnitude;
+        Vector3 newDetectionSize = detectionSize + detectionSize * speed / 100;
+        ExtDebug.DrawBoxCastBox(transform.position, new Vector3(newDetectionSize.x, newDetectionSize.y, 0), transform.forward, transform.rotation, distance + distance * speed / 100, Color.magenta);
+        int targetLayer = LayerMask.GetMask("Targets");
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(newDetectionSize.x, newDetectionSize.y, 0), transform.forward, transform.rotation, distance + distance * speed / 100,targetLayer);
+        if(hits.Length > 0)
         {
-            if(currentSlice == hit.collider)
-            {
-                return;
-            }
-
-            currentSlice = hit.collider;
             animator.SetTrigger("swing");
             katanaSlicer.canSlice = true;
-
-            if (extra > 30)
-            {
-                katanaSlicer.Slice(hit.collider);
-            }
+            katanaSlicer.DoSlice(hits);
         }
         else
         {
             animator.ResetTrigger("swing");
             katanaSlicer.canSlice = false;
-            currentSlice = null;
         }
-    }
 
-    private void OnDrawGizmos()
-    {
-        float extra = playerRB.velocity.magnitude;
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * distance + transform.forward * extra * distanceUsed);
     }
 }
