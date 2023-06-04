@@ -43,13 +43,23 @@ public class LevelLoader : MonoBehaviour
     public void NextScene(string sceneName)
     {
         this.sceneName = sceneName;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (sceneName == "Menu")
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         StartCoroutine(FadeToBlack());
     }
     
     public void RestartLevel()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         sceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(FadeToBlack());
     }
