@@ -29,7 +29,7 @@ public class SpeedRunTimer : MonoBehaviour
 
         if (stopwatchActive)
         {
-            currentTime = currentTime - Time.deltaTime;
+            currentTime += Time.deltaTime;
         }
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
         timeText.text = time.ToString(@"mm\:ss\:ff");
