@@ -27,6 +27,7 @@ public class LevelLoader : MonoBehaviour
 
     public void NextScene(string sceneName)
     {
+
         this.sceneName = sceneName;
         StartCoroutine(FadeToBlack());
     }

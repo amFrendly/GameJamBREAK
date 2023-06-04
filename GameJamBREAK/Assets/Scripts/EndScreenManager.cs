@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EndScreenManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class EndScreenManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject MainHud;
     [SerializeField] private GameObject EndScreen;
+    [SerializeField] private Button nextLevelBtn;
 
     private float bestTimeFloat;
     void Start()
@@ -32,9 +34,13 @@ public class EndScreenManager : MonoBehaviour
         MainHud.SetActive(true);
         EndScreen.SetActive(false);
         bestTimeFloat = highScoreManager.GetBestTime(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name == "Level4")
+        {
+            nextLevelBtn.enabled = false;
+        }
     }
 
-    private void OnWin()
+    public void OnWin()
     {
         headerText.text = OnWinText.ToUpper();
         if (speedRunTimer.CurrentTime < bestTimeFloat)
