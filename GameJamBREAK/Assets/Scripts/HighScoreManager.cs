@@ -13,8 +13,7 @@ public class HighScoreManager : MonoBehaviour
     private int firstTime;
     private void Awake()
     {
-        //firstTime = PlayerPrefs.GetInt(FirstTime);
-        firstTime = 0;
+        firstTime = PlayerPrefs.GetInt(FirstTime);
         if (firstTime == 0)
         {
             PlayerPrefs.SetFloat(Level1, 600);

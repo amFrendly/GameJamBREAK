@@ -20,6 +20,8 @@ public class MouseControllSystem : StandaloneInputModule
     {
         mouse = Mouse.current;
         mousePos = Input.mousePosition;
+
+        if (mouse == null) enabled = false;
     }
 
     
