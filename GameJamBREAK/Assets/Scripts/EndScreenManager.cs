@@ -42,23 +42,25 @@ public class EndScreenManager : MonoBehaviour
 
     public void OnWin()
     {
+        Time.timeScale = 0;
         headerText.text = OnWinText.ToUpper();
         if (speedRunTimer.CurrentTime < bestTimeFloat)
         {
-            bestTime.text = speedRunTimer.CurrentTime.ToString(@"mm\:ss\:ff");
-            yourTime.text = speedRunTimer.CurrentTime.ToString(@"mm\:ss\:ff");
+            TimeSpan time = TimeSpan.FromSeconds(speedRunTimer.CurrentTime);
+            bestTime.text = time.ToString(@"mm\:ss\:ff");
+            yourTime.text = time.ToString(@"mm\:ss\:ff");
             highScoreManager.SaveTime(SceneManager.GetActiveScene().name, speedRunTimer.CurrentTime);
         }
         else
         {
             TimeSpan time = TimeSpan.FromSeconds(bestTimeFloat);
             bestTime.text = time.ToString(@"mm\:ss\:ff");
-            yourTime.text = speedRunTimer.CurrentTime.ToString(@"mm\:ss\:ff");
+            TimeSpan youTime = TimeSpan.FromSeconds(speedRunTimer.CurrentTime);
+            yourTime.text = youTime.ToString(@"mm\:ss\:ff");
 
         }
         MainHud.SetActive(false);
         EndScreen.SetActive(true);
-
     }
 
 }
