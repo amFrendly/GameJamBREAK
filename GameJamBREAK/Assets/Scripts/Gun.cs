@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
     void Update()
     {
         fireCounter += Time.deltaTime;
-        if ((Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Mouse0)) && fireCounter >= fireRate)
+        if ((Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Mouse0)) && fireCounter >= fireRate)
         {
             fireCounter = 0;
             var rocket = Instantiate(rocketPrefab, rocketSpawn.position, rocketSpawn.rotation);

@@ -808,7 +808,7 @@ MonoBehaviour:
     m_Bits: 1288
   walkingSpeed: 12
   mouseLookSpeed: 3
-  joyLookSpeed: 1
+  joyLookSpeed: 0.3
   lookXLimit: 90
 --- !u!114 &3952937179510537332
 MonoBehaviour:
