@@ -6,7 +6,7 @@ public class KatanaSlicer2 : MonoBehaviour
 {
     [SerializeField] Transform sliceWith;
     [SerializeField] Rigidbody rigidbody;
-    [SerializeField] Transform debugSlice;
+    //[SerializeField] Transform debugSlice;
     bool canSliceAnimation = true;
     public bool canSlice;
 
@@ -84,9 +84,9 @@ public class KatanaSlicer2 : MonoBehaviour
             if (meshHolder == null) return; // the slice missed
             dontSliceAgain.Add(meshHolder.transform);
             onSlice?.Invoke();
-            Transform transform = Instantiate(debugSlice);
-            transform.position = sliceWith.position;
-            transform.rotation = sliceWith.rotation;
+            //Transform transform = Instantiate(debugSlice);
+            //transform.position = sliceWith.position;
+            //transform.rotation = sliceWith.rotation;
             //Debug.Break();
             if (collider.gameObject.TryGetComponent(out Destructable destructable))
             {
