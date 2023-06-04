@@ -66,6 +66,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1644815123811185786}
     - target: {fileID: 341801272592797269, guid: 9fa00763601132e42b02efeb98d789a0, type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 905276676007228562}
+    - target: {fileID: 341801272592797269, guid: 9fa00763601132e42b02efeb98d789a0, type: 3}
       propertyPath: nextLevelBtn
       value: 
       objectReference: {fileID: 1644815123775569291}
@@ -185,6 +189,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f8668b6bc21ffd4c9adb3155b0c90cc, type: 3}
+--- !u!1 &905276676007228562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4156506285866303204, guid: 9f8668b6bc21ffd4c9adb3155b0c90cc, type: 3}
+  m_PrefabInstance: {fileID: 3836732797606054518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3447398126426128906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905276676007228562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b423427c9586034b9855893db92ecf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+  up: 7700000011010000
+  left: 6100000014010000
+  down: 7300000013010000
+  right: 6400000013010000
+  mouseSpeed: 360
 --- !u!4 &905276676007228575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4156506285866303209, guid: 9f8668b6bc21ffd4c9adb3155b0c90cc, type: 3}

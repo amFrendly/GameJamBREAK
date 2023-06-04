@@ -27,10 +27,12 @@ public class EndScreenManager : MonoBehaviour
     [SerializeField] private Button nextLevelBtn;
     [Header("Player prefab")]
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject eventSystem;
 
     private float bestTimeFloat;
     void Start()
     {
+        eventSystem.GetComponent<MouseControllSystem>().enabled = false;
         MainHud.SetActive(true);
         EndScreen.SetActive(false);
         newBest.enabled = false;
@@ -43,6 +45,7 @@ public class EndScreenManager : MonoBehaviour
 
     public void OnWin()
     {
+        eventSystem.GetComponent<MouseControllSystem>().enabled = true;
         Time.timeScale = 0;
         player.GetComponent<PlayerMovement>().enabled = false;
         player.GetComponent<Gun>().enabled = false;
