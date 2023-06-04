@@ -53,6 +53,8 @@ MonoBehaviour:
   highScoreManager: {fileID: 341801272621689036}
   MainHud: {fileID: 0}
   EndScreen: {fileID: 0}
+  nextLevelBtn: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &341801272614391712
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,23 +9,19 @@ using UnityEngine.SceneManagement;
 public class HighScoreManager : MonoBehaviour
 {
     private float highScore;
-    private const string Level1 = "Level1", Level2 = "Level2", Level3 = "Level3", Level4 = "Level4", Level5 = "Level5", FirstTime = "FirstTime";
+    private const string Level1 = "Level1", Level2 = "Level2", Level3 = "Level3", Level4 = "Level4", Tutorial = "Tutorial", FirstTime = "FirstTime";
     private int firstTime;
     private void Awake()
     {
         //firstTime = PlayerPrefs.GetInt(FirstTime);
         firstTime = 0;
-        if (firstTime == 1)
-        {
-            PlayerPrefs.SetInt(FirstTime, 0);
-        }
-        else
+        if (firstTime == 0)
         {
             PlayerPrefs.SetFloat(Level1, 600);
             PlayerPrefs.SetFloat(Level2, 600);
             PlayerPrefs.SetFloat(Level3, 600);
             PlayerPrefs.SetFloat(Level4, 600);
-            PlayerPrefs.SetFloat(Level5, 600);
+            PlayerPrefs.SetFloat(Tutorial, 600);
             PlayerPrefs.SetInt(FirstTime, 1);
         }
     }
@@ -45,8 +41,8 @@ public class HighScoreManager : MonoBehaviour
             case Level4:
                 highScore = (PlayerPrefs.GetFloat(Level4));
                 break;
-            case Level5:
-                highScore = (PlayerPrefs.GetFloat(Level5));
+            case Tutorial:
+                highScore = (PlayerPrefs.GetFloat(Tutorial));
                 break;
         }
         return highScore;
@@ -68,8 +64,8 @@ public class HighScoreManager : MonoBehaviour
             case Level4:
                 PlayerPrefs.SetFloat(Level4, time);
                 break;
-            case Level5:
-                PlayerPrefs.SetFloat(Level5, time); 
+            case Tutorial:
+                PlayerPrefs.SetFloat(Tutorial, time); 
                 break;
         }
     }

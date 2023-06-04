@@ -51,8 +51,9 @@ public class EndScreenManager : MonoBehaviour
         headerText.text = OnWinText.ToUpper();
         if (speedRunTimer.CurrentTime < bestTimeFloat)
         {
+            TimeSpan bestTimeSpan = TimeSpan.FromSeconds(bestTimeFloat);
+            bestTime.text = bestTimeSpan.ToString(@"mm\:ss\:ff");
             TimeSpan time = TimeSpan.FromSeconds(speedRunTimer.CurrentTime);
-            bestTime.text = time.ToString(@"mm\:ss\:ff");
             yourTime.text = time.ToString(@"mm\:ss\:ff");
             highScoreManager.SaveTime(SceneManager.GetActiveScene().name, speedRunTimer.CurrentTime);
         }

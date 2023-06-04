@@ -14,7 +14,6 @@ public class LevelLoader : MonoBehaviour
     private int tutorialDoneInt;
     public delegate void OnFadeEnd();
     public OnFadeEnd fadeEnd;
-
     private void Awake()
     {
         blackOutSquare.raycastTarget = false;
@@ -54,16 +53,10 @@ public class LevelLoader : MonoBehaviour
         sceneName = SceneManager.GetActiveScene().name;
         StartCoroutine(FadeToBlack());
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            StartCoroutine(FadeToBlack());
-        }
-    }
 
     IEnumerator FadeToBlack(bool fadeToBlack = true, int fadeSpeed = 1)
     {
+        
         Color objectColor = blackOutSquare.color;
         float fadeAmount;
 
@@ -92,7 +85,7 @@ public class LevelLoader : MonoBehaviour
                 blackOutSquare.color = objectColor;
                 yield return null;
             }
-                fadeEnd?.Invoke();
+            fadeEnd?.Invoke();
         }
     }
 }
