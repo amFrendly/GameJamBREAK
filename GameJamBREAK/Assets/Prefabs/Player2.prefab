@@ -82,7 +82,7 @@ MonoBehaviour:
   katana: {fileID: 4213275291334205121}
   distance: 2
   playerRB: {fileID: 4463690589064842443}
-  distanceUsed: 0.05
+  detectionSize: {x: 0.7, y: 1}
 --- !u!1 &1285828554671845330
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +177,6 @@ GameObject:
   - component: {fileID: 4213275291334205121}
   - component: {fileID: 997358307744731492}
   - component: {fileID: 3040953743118443950}
-  - component: {fileID: 7135595985704487651}
   - component: {fileID: 3952937178908567851}
   - component: {fileID: 2001967154135027021}
   m_Layer: 0
@@ -253,20 +252,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7135595985704487651
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3545281928659174523}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: 4678cf47c2bad8841b702500be76c824, type: 3}
 --- !u!95 &3952937178908567851
 Animator:
   serializedVersion: 4
@@ -300,7 +285,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sliceWith: {fileID: 6792653995306113689}
+  rigidbody: {fileID: 4463690589064842443}
+  debugSlice: {fileID: 0}
   canSlice: 0
+  detectionSize: {x: 1.5, y: 0.4, z: 0.4}
 --- !u!1 &3952937178252702370
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,7 +807,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1288
   walkingSpeed: 12
-  lookSpeed: 3
+  mouseLookSpeed: 3
+  joyLookSpeed: 1
   lookXLimit: 90
 --- !u!114 &3952937179510537332
 MonoBehaviour:
