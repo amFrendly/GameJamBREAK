@@ -27,17 +27,12 @@ public class Crosshair : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit _, grappleLayer))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit))
         {
-            crosshair.color = grappleColor;
-        }
-        else if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _, targetLayer))
-        {
-            crosshair.color = targetColor;
-        }
-        else
-        {
-            crosshair.color = defaultColor;
+            //(killLayer & (1 << collision.gameObject.layer)) != 0)
+            if ((grappleLayer & (1 << hit.transform.gameObject.layer)) != 0) crosshair.color = grappleColor;
+            else if ((targetLayer & (1 << hit.transform.gameObject.layer)) != 0) crosshair.color = targetColor;
+            else crosshair.color = defaultColor;
         }
     }
 }
