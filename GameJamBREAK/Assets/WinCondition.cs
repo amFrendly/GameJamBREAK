@@ -39,7 +39,7 @@ public class WinCondition : MonoBehaviour
            // timeScale = Time.timeScale;
             Time.timeScale = slowMoScale;
             Time.fixedDeltaTime = 0.02f * slowMoScale;
-            killScript.enabled= false;
+            killScript.Invincible = true;
             StartCoroutine(ShowEndScreen());
         }
     }
