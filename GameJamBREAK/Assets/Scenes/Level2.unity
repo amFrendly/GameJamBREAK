@@ -385,6 +385,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1881152124}
+    - target: {fileID: 1644815123775569291, guid: f57ce6bf91e28294f9bfd151f1280b71, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Level3
+      objectReference: {fileID: 0}
     - target: {fileID: 6132082995337297283, guid: f57ce6bf91e28294f9bfd151f1280b71, type: 3}
       propertyPath: m_RootOrder
       value: 2
