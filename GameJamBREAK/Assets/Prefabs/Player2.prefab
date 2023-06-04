@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9097206917758485362
 Transform:
   m_ObjectHideFlags: 0
@@ -355,7 +355,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3952937178613102509}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.04, y: -1.4, z: 1.7696661}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -835,6 +835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketPrefab: {fileID: 4667090499969010027, guid: 0981a9d38bd27014cabc91b522ed8fee, type: 3}
   rocketSpawn: {fileID: 3952937178252702371}
+  fireRate: 0.5
 --- !u!135 &3952937179894064570
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -971,6 +972,34 @@ MonoBehaviour:
     m_Bits: 1288
   line: {fileID: 3952937179894064564}
   minGrappleDistance: 2
+  hook: {fileID: 0}
+  segments: 100
+  grappleAnimationTime: 0.2
+  amplitude: 3
+  dropOff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &3952937179069332685
 MonoBehaviour:
   m_ObjectHideFlags: 0

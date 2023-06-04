@@ -32,6 +32,7 @@ public class Grapple : MonoBehaviour
 
 
     [SerializeField] private GameObject hook;
+    //[SerializeField] private Transform hookPoint;
     [SerializeField] private int segments = 100;
     [SerializeField] private float grappleAnimationTime = 1.0f;
     [SerializeField] private float amplitude = 3.0f;
@@ -41,11 +42,13 @@ public class Grapple : MonoBehaviour
 
     bool grapple;
     float grappleTime;
+    Vector3 grapplePointNormal;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         line.positionCount = segments;
+       // hook.transform.SetPositionAndRotation(grappleBarrel.position, grappleBarrel.rotation);
     }
 
     void Update()
@@ -55,6 +58,7 @@ public class Grapple : MonoBehaviour
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, maxGrappleDistance, layerMask))
             {
                 grapplePoint = hit.point;
+                grapplePointNormal = hit.normal;
                 grappleTime = 0;
                 grapple = true;
             }
@@ -73,12 +77,13 @@ public class Grapple : MonoBehaviour
             line.enabled = true;
             //line.SetPositions(new Vector3[] { grappleBarrel.position, grapplePoint });
             AnimateLine();
-            hook.SetActive(false);
+            //hook.SetActive(false);
         }
         else
         {
             line.enabled = false;
-            hook.SetActive(true);
+            hook.transform.SetPositionAndRotation(grappleBarrel.position, grappleBarrel.rotation);
+            //hook.SetActive(true);
         }
     }
 
@@ -97,12 +102,16 @@ public class Grapple : MonoBehaviour
             float t = (float)i / segments; //how far along the line
             Vector3 position = grappleBarrel.position + t * distance * direction;
 
-            Vector3 positionOffset = grappleBarrel.forward * amplitude * Mathf.Sin(distance * t * Mathf.PI) * dropOff.Evaluate(t) * (1-animTime);
+            Vector3 positionOffset = grappleBarrel.up * amplitude * Mathf.Sin(distance * t * Mathf.PI) * dropOff.Evaluate(t) * (1-animTime);
             positionOffset += grappleBarrel.right * amplitude * Mathf.Cos(distance * t * Mathf.PI) * dropOff.Evaluate(t) * (1 - animTime);
             position += positionOffset;
 
             line.SetPosition(i, position);
         }
+
+        Vector3 hookPosition = grappleBarrel.position + distance * direction;
+        Quaternion rotation = Quaternion.Slerp(grappleBarrel.rotation, Quaternion.LookRotation(-grapplePointNormal, Vector3.up), animTime);
+        hook.transform.SetPositionAndRotation(hookPosition, rotation);
     }
 
     private void FixedUpdate()
