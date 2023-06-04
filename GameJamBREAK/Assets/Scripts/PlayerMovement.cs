@@ -43,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new Vector3(-rb.velocity.x, 0, -rb.velocity.z) * 0.5f, ForceMode.VelocityChange);
         }
-        Debug.Log(isGrounded);
     }
 
     [SerializeField]
