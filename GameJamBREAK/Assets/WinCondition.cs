@@ -11,6 +11,7 @@ public class WinCondition : MonoBehaviour
     [SerializeField] private EndScreenManager endScreen;
     [SerializeField] private float slowScreenTime = 2.0f;
     [SerializeField] private SpeedRunTimer speedRunTimer;
+    [SerializeField] private KillScript killScript;
     //[SerializeField] private KatanaSlicer katanaSlicer;
 
     //private float timeScale;
@@ -38,13 +39,14 @@ public class WinCondition : MonoBehaviour
            // timeScale = Time.timeScale;
             Time.timeScale = slowMoScale;
             Time.fixedDeltaTime = 0.02f * slowMoScale;
+            killScript.enabled= false;
             StartCoroutine(ShowEndScreen());
         }
     }
 
     private IEnumerator ShowEndScreen()
     {
-        yield return new WaitForSeconds(slowScreenTime);
+        yield return new WaitForSecondsRealtime(slowScreenTime);
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = 0.02f;
         endScreen.OnWin();
