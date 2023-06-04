@@ -9,7 +9,6 @@ public class KatanaActivation : MonoBehaviour
     [SerializeField] Transform katana;
     [SerializeField] float distance;
     [SerializeField] Rigidbody playerRB;
-    [SerializeField] float distanceUsed;
     KatanaSlicer2 katanaSlicer;
 
     [SerializeField] Vector2 detectionSize;
