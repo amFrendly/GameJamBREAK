@@ -52,18 +52,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     [SerializeField]
-    float lookSpeed, lookXLimit;
+    float mouseLookSpeed = 3, joyLookSpeed = 1, lookXLimit;
 
     float rotationX;
 
     private void LookAround()
     { 
-        rotationX += -Input.GetAxis("Vertical") * lookSpeed * lookAxis; //Joystick
-        rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;             //Mouse
+        rotationX += -Input.GetAxis("Vertical") * joyLookSpeed * lookAxis; //Joystick
+        rotationX += -Input.GetAxis("Mouse Y") * mouseLookSpeed;             //Mouse
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
         cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Horizontal") * lookSpeed, 0);  //Joystick
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);     //Mouse
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Horizontal") * joyLookSpeed, 0);  //Joystick
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * mouseLookSpeed, 0);     //Mouse
     }
 
     //private void OnTriggerEnter(Collider other)
