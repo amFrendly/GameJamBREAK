@@ -18,7 +18,6 @@ public class EndScreenManager : MonoBehaviour
     [SerializeField] private string OnWinText = "Completed";
 
     [Header("Stuff to subscribe to")]
-    [SerializeField] private string Example2 = "OnWin";
     [SerializeField] private HighScoreManager highScoreManager;
 
     [Header("Panels")]
