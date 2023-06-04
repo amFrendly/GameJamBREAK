@@ -10,7 +10,8 @@ public class LevelLoader : MonoBehaviour
     [Header("Black Image")]
     [SerializeField] private Image blackOutSquare;
     private string sceneName;
-
+    private const string tutorialDone = "Tutorial";
+    private int tutorialDoneInt;
     public delegate void OnFadeEnd();
     public OnFadeEnd fadeEnd;
 
@@ -24,11 +25,27 @@ public class LevelLoader : MonoBehaviour
         if (blackOutSquare.enabled == false) blackOutSquare.enabled = true;
         if (blackOutSquare != null) StartCoroutine(FadeToBlack(false));
     }
-
+    public void MainPlay()
+    {
+        tutorialDoneInt = PlayerPrefs.GetInt(tutorialDone);
+        if (tutorialDoneInt == 0)
+        {
+            sceneName = "Tutorial";
+            PlayerPrefs.SetInt(tutorialDone, 1);
+        }
+        else
+        {
+            sceneName = "Level1";
+        }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        StartCoroutine(FadeToBlack());
+    }
     public void NextScene(string sceneName)
     {
-
         this.sceneName = sceneName;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         StartCoroutine(FadeToBlack());
     }
     
