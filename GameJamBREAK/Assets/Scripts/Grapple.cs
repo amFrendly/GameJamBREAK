@@ -28,9 +28,6 @@ public class Grapple : MonoBehaviour
     [SerializeField]
     float minGrappleDistance = 1;
 
-    [SerializeField]
-    Image crosshair;
-
     Vector3 grapplePoint;
 
     bool grapple;
@@ -42,21 +39,9 @@ public class Grapple : MonoBehaviour
 
     void Update()
     {
-        bool aimedAtGrappleWall;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, maxGrappleDistance, layerMask))
-        {
-            crosshair.color = Color.black;
-            aimedAtGrappleWall = true;
-        }
-        else
-        {
-            crosshair.color = Color.yellow;
-            aimedAtGrappleWall = false;
-        }
-
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if (aimedAtGrappleWall)
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, maxGrappleDistance, layerMask))
             {
                 grapplePoint = hit.point;
                 grapple = true;
