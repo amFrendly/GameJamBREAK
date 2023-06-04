@@ -2014,7 +2014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1206e312b86e4469c6f515938e94fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowMoScale: 0.3
+  slowMoScale: 0.2
   endScreen: {fileID: 1413487201}
   slowScreenTime: 2
   speedRunTimer: {fileID: 1413487204}

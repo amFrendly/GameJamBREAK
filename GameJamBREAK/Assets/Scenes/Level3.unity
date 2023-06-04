@@ -628,7 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1206e312b86e4469c6f515938e94fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowMoScale: 1
+  slowMoScale: 0.2
   endScreen: {fileID: 1226233130}
   slowScreenTime: 2
   speedRunTimer: {fileID: 1833095085}
@@ -1958,6 +1958,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2076370964}
+    - target: {fileID: 1644815123775569291, guid: f57ce6bf91e28294f9bfd151f1280b71, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Level4
+      objectReference: {fileID: 0}
     - target: {fileID: 6132082995337297283, guid: f57ce6bf91e28294f9bfd151f1280b71, type: 3}
       propertyPath: m_RootOrder
       value: 11
